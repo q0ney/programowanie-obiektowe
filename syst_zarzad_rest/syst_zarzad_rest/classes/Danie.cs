@@ -11,9 +11,9 @@ namespace syst_zarzad_rest
     {
         public string Nazwa { get; set; }
         public string Opis { get; set; }
-        public byte Cena { get; set; }
+        public double Cena { get; set; }
 
-        public Danie(string nazwa, string opis, byte cena)
+        public Danie(string nazwa, string opis, double cena)
         {
             Nazwa = nazwa;
             Opis = opis;
