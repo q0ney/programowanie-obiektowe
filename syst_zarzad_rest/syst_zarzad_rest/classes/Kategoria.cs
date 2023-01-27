@@ -11,6 +11,7 @@ namespace syst_zarzad_rest
         public string NazwaKategoria { get; set; }
         public List<Danie> Dania { get; set; }
 
+
         public Kategoria(string nazwaKategoria)
         {
             NazwaKategoria = nazwaKategoria;

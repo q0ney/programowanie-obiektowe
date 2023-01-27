@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace syst_zarzad_rest
 {
-    class Danie
+    public class Danie
     {
         public string Nazwa { get; set; }
         public string Opis { get; set; }

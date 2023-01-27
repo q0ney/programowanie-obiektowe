@@ -44,6 +44,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="classes\Aplikacja.cs" />
+    <Compile Include="classes\DaniaMiesne.cs" />
+    <Compile Include="classes\DaniaRybne.cs" />
+    <Compile Include="classes\DaniaWegetarianskie.cs" />
     <Compile Include="classes\Danie.cs" />
     <Compile Include="classes\Kategoria.cs" />
     <Compile Include="classes\Menu.cs" />
@@ -55,6 +58,8 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Rachunki\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
