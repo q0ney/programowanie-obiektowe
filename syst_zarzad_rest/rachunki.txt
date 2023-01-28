@@ -1,9 +1,5 @@
-1. Data zamowienia: 1/27/2023 10:07:42 PM
+1. Data zamowienia: 1/28/2023 7:58:07 PM
  - Krem z pomidorów (15 zl)
  - Rosół (45 zl)
 Kwota: 60 zl
- 
-2. Data zamowienia: 1/28/2023 10:07:42 PM
- - Rosół (45 zl)
-Kwota: 45 zl
  

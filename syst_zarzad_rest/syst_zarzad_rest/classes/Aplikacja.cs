@@ -94,6 +94,19 @@ namespace syst_zarzad_rest
             _rachunki.Add(new Rachunek(z));
         }
 
+
+        public void OdczytajzPliku()
+        {
+            using (StreamReader sr = new StreamReader($"C:\\Users\\propa\\source\\repos\\syst_zarzad_rest\\rachunki.txt"))
+            {
+                string line;
+                while ((line = sr.ReadLine()) != null)
+                {
+                    Console.WriteLine(line);
+                }
+            }
+        }
+
         public void ZapiszDoPliku(Zamowienie z)
         {
             // tworzenie txt
@@ -115,7 +128,10 @@ namespace syst_zarzad_rest
             }
         }
 
-        public void WyswietlRachunki()
+
+
+
+public void WyswietlRachunki()
         {
             foreach (var rachunek in _rachunki)
             {
