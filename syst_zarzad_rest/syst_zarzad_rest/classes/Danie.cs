@@ -9,14 +9,13 @@ using Applikacja2;
 
 namespace syst_zarzad_rest
 {
-    internal class Danie 
+    internal class Danie : IOpcje, IAddRemove
     {
 
         public static int IDDania { get; set; }
         public static string Nazwa { get; set; }
         public static string Opis { get; set; }
         public static double Cena { get; set; }
-        public static int Rodzaj { get; set; }
         static int aktywnaPozycjaMenu = 0;
         static string[] pozycjeMenu = { "1. Dodaj danie", "2.Usun danie", "3. Wroc" };
 
@@ -31,8 +30,7 @@ namespace syst_zarzad_rest
 
         }
 
-        public class Opcje : IOpcje
-        {
+ 
 
             public void UsunPozycje()
         {
@@ -65,12 +63,12 @@ namespace syst_zarzad_rest
 
                     if (choice == 1)
                     {
-                        return;
-                       
+                        IDDania++;
+
                     }
                     else if (choice == 2)
                     {
-                        IDDania++;
+                        
                         StartOpcje();
                     }
                     else
@@ -171,10 +169,7 @@ namespace syst_zarzad_rest
 
         }
 
-        public override string ToString()
-        {
-            return $"Nazwa: {IDDania}, Nazwa: {Nazwa}, Opis: {Opis}, Cena: {Cena}, Cena: {Rodzaj}";
-        }
 
-    }
+
+    
 }

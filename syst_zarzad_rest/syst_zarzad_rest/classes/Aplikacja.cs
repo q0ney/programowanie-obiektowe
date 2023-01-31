@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.IO;
 using syst_zarzad_rest;
 using static syst_zarzad_rest.Danie;
+using static syst_zarzad_rest.Zamowienie;
 
 namespace Applikacja2
 {
@@ -17,7 +18,7 @@ namespace Applikacja2
         private static List<Kategoria> _kategoria;
         private static List<Rachunek> _rachunki;
         static string[] pozycjeMenu = { "1. Wyswietl menu", "2. Wyswietl zamowienia", "3. Rachunki",
-         "4. Dania", "5. Kategorie", "6. Zrob nowe zamowienie", "7. Usun zamowienie", "8. Odczyt rachunku", "9. Exit"};
+         "4. Dania", "5. Zamowienia", "6. Exit"};
         static string[] pozycjeRachunki = { "1. Wyswietl wszystkie rachunki", "2. Zpisz rachunki do pliku", "3. Odczytaj rachunki z pliku", "4. Wroc" };
         static int aktywnaPozycjaMenu = 0;
 
@@ -66,7 +67,7 @@ namespace Applikacja2
             foreach (Kategoria k in _menu.Kategoria)
             {
                 Console.WriteLine(k.NazwaKategoria);
-                foreach (Danie d in k.Dania)
+                foreach (Danie d in k.IDDania)
                 {
                     Console.WriteLine(" - " + Danie.Nazwa + ": " + Danie.Opis + " (" + Danie.Cena + " zł )");
                 }
@@ -79,9 +80,9 @@ namespace Applikacja2
             foreach (var zamowienie in _zamowienia)
             {
 
-                Console.WriteLine("Data zamowienia: {0}", zamowienie.DataZamowienia);
+               // Console.WriteLine("Data zamowienia: {0}", zamowienie.DataZamowienia);
                 Console.WriteLine("Dania: ");
-                foreach (var d in zamowienie.Dania)
+               // foreach (var d in zamowienie.Dania)
                 {
                     Console.WriteLine(" - {0} ({1} zl)", Danie.Nazwa, Danie.Cena);
                 }
@@ -92,15 +93,15 @@ namespace Applikacja2
 
         }
 
-        public List<Zamowienie> WyszukajZamowieniePoDacie(DateTime data)
-        {
-            return _zamowienia.Where(z => z.DataZamowienia.Date == data.Date).ToList();
-        }
+       // public List<Zamowienie> WyszukajZamowieniePoDacie(DateTime data)
+        //{
+        //    return _zamowienia.Where(z => z.DataZamowienia.Date == data.Date).ToList();
+        //}
 
-        public void WygenerujRachunek(Zamowienie z)
-        {
-            _rachunki.Add(new Rachunek());
-        }
+       // public void WygenerujRachunek(Zamowienie z)
+        //{
+        //    _rachunki.Add(new Rachunek());
+        //}
 
 
         public static void OdczytajzPliku()
@@ -124,8 +125,8 @@ namespace Applikacja2
             {
                 foreach (var rachunek in _rachunki)
                 {
-                    sw.WriteLine(i + ". Data zamowienia: {0}", rachunek.Zamowienie.DataZamowienia);
-                    foreach (var d in rachunek.Zamowienie.Dania)
+                   // sw.WriteLine(i + ". Data zamowienia: {0}", rachunek.Zamowienie.DataZamowienia);
+                   // foreach (var d in rachunek.Zamowienie.Dania)
                     {
                         sw.WriteLine(" - {0} ({1} zl)", Danie.Nazwa, Danie.Cena);
                     }
@@ -143,9 +144,9 @@ namespace Applikacja2
         {
             foreach (var rachunek in _rachunki)
             {
-                Console.WriteLine("Data zamowienia: {0}", rachunek.Zamowienie.DataZamowienia);
+                //Console.WriteLine("Data zamowienia: {0}", rachunek.Zamowienie.DataZamowienia);
                 Console.WriteLine("Dania: ");
-                foreach (var d in rachunek.Zamowienie.Dania)
+                //foreach (var d in rachunek.Zamowienie.Dania)
                 {
                     Console.WriteLine(" - {0} ({1} zl)", Danie.Nazwa, Danie.Cena);
                 }
@@ -154,10 +155,10 @@ namespace Applikacja2
             }
         }
 
-        public List<Rachunek> WyszukajRachunkiPoDacie(DateTime data)
-        {
-            return _rachunki.Where(r => r.Zamowienie.DataZamowienia.Date == data.Date).ToList();
-        }
+       // public List<Rachunek> WyszukajRachunkiPoDacie(DateTime data)
+        //{
+            //return _rachunki.Where(r => r.Zamowienie.DataZamowienia.Date == data.Date).ToList();
+       // }
 
 
 
@@ -254,16 +255,17 @@ namespace Applikacja2
                     tabrachunek[0].StartOpcje();
                     break;
                 case 3: Console.Clear();
-                    Opcje[] tabrachunek1 = new Opcje[2];
-                    tabrachunek1[0] = new Opcje();
+                    Danie[] tabrachunek1 = new Danie[1];
+            
                     tabrachunek1[0].StartOpcje();
                     break;
-                case 4: Console.Clear(); WyswietlWszystkieDania(); break;
-                case 5: Console.Clear(); WyswietlWszystkieDania(); break;
-                case 6: Console.Clear(); WyswietlWszystkieDania(); break;
-                case 7: Console.Clear(); WyswietlWszystkieDania(); break;
-                case 8: Console.Clear(); WyswietlWszystkieDania(); break;
-                case 9: Environment.Exit(0); break;
+                case 4: Console.Clear();
+                    OpcjeZamowienia[] tabzamowienia = new OpcjeZamowienia[2];
+                    tabzamowienia[0] = new OpcjeZamowienia();
+                    tabzamowienia[0].StartOpcje();
+                    ; break;
+               
+                case 5: Environment.Exit(0); break;
             }
 
 

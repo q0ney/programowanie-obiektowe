@@ -11,13 +11,13 @@ namespace syst_zarzad_rest
     class Kategoria 
     {
         public string NazwaKategoria { get; set; }
-        public List<Danie> Dania { get; set; }
+        public List<Danie> IDDania { get; set; }
 
 
         public Kategoria(string nazwaKategoria)
         {
             NazwaKategoria = nazwaKategoria;
-            Dania = new List<Danie>();
+            IDDania = new List<Danie>();
         }
 
         
@@ -28,11 +28,11 @@ namespace syst_zarzad_rest
 
         public void UsunPozycje(Danie d)
         {
-            Dania.Remove(d);
+            IDDania.Remove(d);
         }
         public void DodajPozycje(Danie d)
         {
-            Dania.Add(d);
+            IDDania.Add(d);
         }
 
 
