@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace syst_zarzad_rest
 {
-    class Menu
+    class Menu : MenuBase
     {
         public List<Kategoria> Kategoria { get; set; }
 
@@ -15,17 +15,10 @@ namespace syst_zarzad_rest
             Kategoria = new List<Kategoria>();
         }
 
-        // Metoda pozwalająca dodać kategorie do menu
-        public void DodajKategorie(Kategoria k)
-        {
-            Kategoria.Add(k);
-        }
-
         // Metoda pozwalająca usunąć kategorie z menu
         public void UsunKategorie(Kategoria k)
         {
             Kategoria.Remove(k);
         }
-
     }
 }

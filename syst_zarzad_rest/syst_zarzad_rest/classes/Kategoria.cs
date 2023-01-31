@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+using Applikacja2;
+
 namespace syst_zarzad_rest
 {
-    class Kategoria
+    class Kategoria 
     {
         public string NazwaKategoria { get; set; }
         public List<Danie> Dania { get; set; }
@@ -18,17 +20,21 @@ namespace syst_zarzad_rest
             Dania = new List<Danie>();
         }
 
+        
         // Metoda pozwalająca dodać danie do kategorii
-        public void DodajDanie(Danie d)
+
+
+
+
+        public void UsunPozycje(Danie d)
+        {
+            Dania.Remove(d);
+        }
+        public void DodajPozycje(Danie d)
         {
             Dania.Add(d);
         }
 
-        // Metoda pozwalająca usunąć danie z kategorii
-        public void UsunDanie(Danie d)
-        {
-            Dania.Remove(d);
-        }
 
         public override string ToString()
         {

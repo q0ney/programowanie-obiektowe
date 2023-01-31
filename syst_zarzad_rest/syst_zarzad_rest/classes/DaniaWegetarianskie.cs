@@ -8,8 +8,8 @@ namespace syst_zarzad_rest
 {
     class DanieVege : Danie
     {
-       public DanieVege(string nazwa, string opis, double cena)
-            : base(nazwa, opis, cena)
+       public DanieVege(int idDania, string nazwa, string opis, double cena)
+            : base(idDania, nazwa, opis, cena)
         {
 
         }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Applikacja2;
 
 namespace syst_zarzad_rest
 {
@@ -27,7 +28,7 @@ namespace syst_zarzad_rest
 
         public double ObliczKwote()
         {
-            return Dania.Sum(d => d.Cena);
+            return Dania.Sum(idDania => Danie.Cena);
         }
 
 
