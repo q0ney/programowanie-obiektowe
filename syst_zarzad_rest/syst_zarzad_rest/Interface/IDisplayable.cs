@@ -3,21 +3,15 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
 
 namespace syst_zarzad_rest
 {
 
-
-    class Program
+    public interface IDisplayable
     {
 
-        static void Main(string[] args)
-        {
-
-            GUI.StartOpcje();
-
-        }
+        void  Display();
+        
+        void WyszukajPoID(int idZam);
     }
- }
-    
+}

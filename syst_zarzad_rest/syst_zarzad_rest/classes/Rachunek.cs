@@ -3,26 +3,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Applikacja2;
 
 namespace syst_zarzad_rest
 {
-    internal class Rachunek : IOpcje 
+    class Rachunek
     {
-        
         public Zamowienie Zamowienie { get; set; }
         public double Kwota { get; set; }
         public DateTime DataWystawienia { get; set; }
+        public int IdRach { get; set;}
+        public static string[] pozycjeMenu = { "1. Wygeneruj rachunek dla zamowien", "2. Zapisz do pliku", "3. Odczytaj z pliku", "4. Wyszukaj rachunek po id", "5. Wroc" };
+        public static int aktywnaPozycjaMenu = 0;
 
-        static string[] pozycjeRachunki = { "1. Wyswietl wszystkie rachunki", "2. Zpisz rachunki do pliku", "3. Odczytaj rachunki z pliku", "4. Wroc" };
-        static int aktywnaPozycjaMenu = 0;
+        public Rachunek(Zamowienie zamowienie)
+        {
+            Zamowienie = zamowienie;
+            Kwota = zamowienie.ObliczKwote();
+            DataWystawienia = DateTime.Now;
+            IdRach = zamowienie.IdZam;
+        }
 
-        //public Rachunek()
 
-
-       
-
-        public void StartOpcje()
+        public static void StartOpcje()
         {
             while (true)
             {
@@ -32,20 +34,19 @@ namespace syst_zarzad_rest
             }
         }
 
-        public void PokazOpcje()
+        public static void PokazOpcje()
         {
+
             Console.BackgroundColor = ConsoleColor.Blue;
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("Press any key to continue");
-            Console.WriteLine();
-            for (int i = 0; i < pozycjeRachunki.Length; i++)
+            for (int i = 0; i < pozycjeMenu.Length; i++)
             {
                 if (i == aktywnaPozycjaMenu)
                 {
                     Console.BackgroundColor = ConsoleColor.White;
                     Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("{0, -35}", pozycjeRachunki[i]);
+                    Console.WriteLine("{0, -35}", pozycjeMenu[i]);
                     Console.BackgroundColor = ConsoleColor.Blue;
                     Console.ForegroundColor = ConsoleColor.White;
 
@@ -54,32 +55,32 @@ namespace syst_zarzad_rest
                 }
                 else
                 {
-                    Console.WriteLine(pozycjeRachunki[i]);
+                    Console.WriteLine(pozycjeMenu[i]);
                 }
             }
         }
 
-        public void WybieranieOpcji()
+        public static void WybieranieOpcji()
         {
             do
             {
                 ConsoleKeyInfo klawisz = Console.ReadKey();
                 if (klawisz.Key == ConsoleKey.UpArrow)
                 {
+                    aktywnaPozycjaMenu = (aktywnaPozycjaMenu > 0) ? aktywnaPozycjaMenu - 1 : pozycjeMenu.Length - 1;
 
-                    aktywnaPozycjaMenu = (aktywnaPozycjaMenu > 0) ? aktywnaPozycjaMenu - 1 : pozycjeRachunki.Length - 1;
-                    StartOpcje();
+                    PokazOpcje();
                 }
                 else if (klawisz.Key == ConsoleKey.DownArrow)
                 {
+                    aktywnaPozycjaMenu = (aktywnaPozycjaMenu + 1) % pozycjeMenu.Length;
 
-                    aktywnaPozycjaMenu = (aktywnaPozycjaMenu + 1) % pozycjeRachunki.Length;
-                    StartOpcje();
+                    PokazOpcje();
                 }
                 else if (klawisz.Key == ConsoleKey.Escape)
                 {
+                    aktywnaPozycjaMenu = pozycjeMenu.Length - 1;
 
-                    aktywnaPozycjaMenu = pozycjeRachunki.Length - 1;
                     break;
                 }
                 else if (klawisz.Key == ConsoleKey.Enter)
@@ -90,18 +91,41 @@ namespace syst_zarzad_rest
             } while (true);
         }
 
-        public void UruchomOpcje()
+        public static void UruchomOpcje()
         {
             switch (aktywnaPozycjaMenu)
             {
-                case 0: Console.Clear(); Aplikacja.WyswietlRachunki(); break;
-                case 1: Console.Clear(); Aplikacja.WyswietlWszystkieDania(); break;
-                case 2: Console.Clear(); Aplikacja.WyswietlWszystkieDania(); break;
-                case 3: Console.Clear(); Aplikacja.StartOpcje(); break;
-                case 4: Environment.Exit(0); break;
+                case 0:
+                    Console.Clear();
+                    Aplikacja.WygenerujRachunek();
+                    break;
+                case 1:
+                    Console.Clear();
+                    Console.WriteLine("Pomyslnie zapisano do pliku");
+                    Aplikacja.ZapiszDoPliku();
+                    Console.ReadKey();
+                    break;
+                case 2:
+                    Console.Clear();
+                    Aplikacja.OdczytajzPliku();
+                    Console.ReadKey();
+                    break;
+                case 3:
+                    Console.Clear();
+                    Console.WriteLine("Podaj id rachunku ktory chcesz wyszukac");
+                    int idRachunku = Convert.ToInt32(Console.ReadLine());
+                    Aplikacja.WyszukajRachunkiPoID(idRachunku);
+                    Console.ReadKey();
+                    break;
+                case 4:
+                    Console.Clear();
+                    GUI.StartOpcje();
+                    break;
             }
+
+
         }
-    
+
 
     }
 }

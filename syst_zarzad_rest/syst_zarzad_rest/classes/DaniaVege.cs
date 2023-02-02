@@ -5,11 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 
 namespace syst_zarzad_rest
-{ 
-    class DanieRybne : Danie
+{
+    class DanieVege : Danie
     {
-        public DanieRybne(int id, string nazwa, string opis, double cena, Kategoria k)
-             : base(id, nazwa, opis, cena, k)
+       public DanieVege(int id, string nazwa, string opis, double cena, Kategoria k)
+            : base(id, nazwa, opis, cena, k)
         {
 
         }

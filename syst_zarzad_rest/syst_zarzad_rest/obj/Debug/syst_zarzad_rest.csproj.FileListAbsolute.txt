@@ -5,3 +5,10 @@ C:\Users\propa\source\repos\syst_zarzad_rest\syst_zarzad_rest\bin\Debug\syst_zar
 C:\Users\propa\source\repos\syst_zarzad_rest\syst_zarzad_rest\bin\Debug\syst_zarzad_rest.pdb
 C:\Users\propa\source\repos\syst_zarzad_rest\syst_zarzad_rest\obj\Debug\syst_zarzad_rest.exe
 C:\Users\propa\source\repos\syst_zarzad_rest\syst_zarzad_rest\obj\Debug\syst_zarzad_rest.pdb
+C:\Users\propa\Desktop\gr_1\_niezaliczone_Jakub Pasik + Jakub Sokołowski\syst_zarzad_rest\syst_zarzad_rest\bin\Debug\syst_zarzad_rest.exe.config
+C:\Users\propa\Desktop\gr_1\_niezaliczone_Jakub Pasik + Jakub Sokołowski\syst_zarzad_rest\syst_zarzad_rest\bin\Debug\syst_zarzad_rest.exe
+C:\Users\propa\Desktop\gr_1\_niezaliczone_Jakub Pasik + Jakub Sokołowski\syst_zarzad_rest\syst_zarzad_rest\bin\Debug\syst_zarzad_rest.pdb
+C:\Users\propa\Desktop\gr_1\_niezaliczone_Jakub Pasik + Jakub Sokołowski\syst_zarzad_rest\syst_zarzad_rest\obj\Debug\syst_zarzad_rest.csproj.AssemblyReference.cache
+C:\Users\propa\Desktop\gr_1\_niezaliczone_Jakub Pasik + Jakub Sokołowski\syst_zarzad_rest\syst_zarzad_rest\obj\Debug\syst_zarzad_rest.csproj.CoreCompileInputs.cache
+C:\Users\propa\Desktop\gr_1\_niezaliczone_Jakub Pasik + Jakub Sokołowski\syst_zarzad_rest\syst_zarzad_rest\obj\Debug\syst_zarzad_rest.exe
+C:\Users\propa\Desktop\gr_1\_niezaliczone_Jakub Pasik + Jakub Sokołowski\syst_zarzad_rest\syst_zarzad_rest\obj\Debug\syst_zarzad_rest.pdb

@@ -6,19 +6,28 @@ using System.Threading.Tasks;
 
 namespace syst_zarzad_rest
 {
-    class Menu : MenuBase
+    abstract class Menu
     {
-        public List<Kategoria> Kategoria { get; set; }
+        
+        public static List<Danie> danie = new List<Danie>();
 
-        public Menu()
+
+        // Metoda pozwalająca dodać kategorie do menu
+        public void DodajDanie(Danie d)
         {
-            Kategoria = new List<Kategoria>();
+            
+            danie.Add(d);
         }
 
         // Metoda pozwalająca usunąć kategorie z menu
-        public void UsunKategorie(Kategoria k)
+        public static void UsunDanie(int idD)
         {
-            Kategoria.Remove(k);
+            var danie22 = Menu.danie.FirstOrDefault(danie => danie.Id == idD);
+            if (danie22 != null)
+            {
+                danie.Remove(danie22);
+            }
         }
+
     }
 }

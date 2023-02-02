@@ -46,16 +46,15 @@
     <Compile Include="classes\Aplikacja.cs" />
     <Compile Include="classes\DaniaMiesne.cs" />
     <Compile Include="classes\DaniaRybne.cs" />
-    <Compile Include="classes\DaniaWegetarianskie.cs" />
+    <Compile Include="classes\DaniaVege.cs" />
     <Compile Include="classes\Danie.cs" />
+    <Compile Include="classes\Functions.cs" />
+    <Compile Include="classes\GUI.cs" />
     <Compile Include="classes\Kategoria.cs" />
     <Compile Include="classes\Menu.cs" />
-    <Compile Include="classes\MenuBase.cs" />
     <Compile Include="classes\Rachunek.cs" />
-    <Compile Include="classes\WyboryMenu.cs" />
     <Compile Include="classes\Zamowienia.cs" />
-    <Compile Include="Interface\IAddRemove.cs" />
-    <Compile Include="Interface\IOpcje.cs" />
+    <Compile Include="Interface\IDisplayable.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

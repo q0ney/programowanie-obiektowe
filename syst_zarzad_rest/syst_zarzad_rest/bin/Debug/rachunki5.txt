@@ -1,0 +1,9 @@
+1. Data zamowienia: 2/2/2023 1:52:45 AM
+ - gowno (12 zl)
+Kwota: 12 zl
+ 
+2. Data zamowienia: 2/2/2023 1:52:55 AM
+ - gowno (12 zl)
+ - gowno (12 zl)
+Kwota: 24 zl
+ 

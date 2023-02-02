@@ -8,9 +8,10 @@ namespace syst_zarzad_rest
 {
     class DanieMiesne : Danie
     {
-        public DanieMiesne(int idDania, string nazwa, string opis, double cena)
-            : base(idDania, nazwa, opis, cena)
+        public DanieMiesne(int id, string nazwa, string opis, double cena, Kategoria k)
+          : base(id, nazwa, opis, cena, k)
         {
+
         }
     }
 

@@ -1,34 +1,16 @@
-﻿
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+
 namespace syst_zarzad_rest
 {
-     class Danie 
+        abstract class GUI 
     {
-
-        public static string[] pozycjeMenu = { "1. Dodaj danie", "2. Usun danie", "3. Wroc" };
+        public static string[] pozycjeMenu = { "1. Wyswietl menu", "2. Dania", "3.Zamowienia", "4.Rachunki", "5. Exit" };
         public static int aktywnaPozycjaMenu = 0;
-        public string Nazwa { get; set; }
-        public string Opis { get; set; }
-        public double Cena { get; set; }
-        public int Id { get; set; }
-
-
-        public Kategoria xd;
-
-        public Danie(int id, string nazwa, string opis, double cena, Kategoria k)
-        {
-            Nazwa = nazwa;
-            Opis = opis;
-            Cena = cena;
-            Id = id;
-            xd = k;
-
-        }
 
         public static void StartOpcje()
         {
@@ -39,6 +21,8 @@ namespace syst_zarzad_rest
                 UruchomOpcje();
             }
         }
+
+
 
         public static void PokazOpcje()
         {
@@ -65,6 +49,8 @@ namespace syst_zarzad_rest
                 }
             }
         }
+
+
 
         public static void WybieranieOpcji()
         {
@@ -97,29 +83,33 @@ namespace syst_zarzad_rest
             } while (true);
         }
 
+
         public static void UruchomOpcje()
         {
             switch (aktywnaPozycjaMenu)
             {
                 case 0: Console.Clear();
-                    Functions.DodawanieDan();
-                    break;
-                case 1: Console.Clear();
-                    Functions.UsuwanieDan();
-                    break;
-                case 2:
-                    Console.Clear();
-                    GUI.StartOpcje();
+                    Aplikacja.WyswietlWszystkieDania();
+                    Console.ReadKey();
                     break;
 
+                case 1: Console.Clear();
+                    Danie.StartOpcje();
+                    break;
+
+                case 2:
+                    Console.Clear();
+                    Zamowienie.StartOpcje();
+                    break;
+                case 3:
+                    Console.Clear();
+                    Rachunek.StartOpcje();
+                    break;
+
+                case 4: Environment.Exit(0); break;
             }
 
 
         }
     }
-
-
-
-
 }
-

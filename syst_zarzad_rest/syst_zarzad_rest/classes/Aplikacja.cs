@@ -4,87 +4,58 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
-using syst_zarzad_rest;
-using static syst_zarzad_rest.Danie;
-using static syst_zarzad_rest.Zamowienie;
 
-namespace Applikacja2
+
+namespace syst_zarzad_rest
 {
-    internal class Aplikacja 
+    abstract class Aplikacja : IDisplayable
     {
         private const string V = "WriteText.txt";
-        private static Menu _menu;
-        private static List<Zamowienie> _zamowienia;
-        private static List<Kategoria> _kategoria;
-        private static List<Rachunek> _rachunki;
-        static string[] pozycjeMenu = { "1. Wyswietl menu", "2. Wyswietl zamowienia", "3. Rachunki",
-         "4. Dania", "5. Zamowienia", "6. Exit"};
-        static string[] pozycjeRachunki = { "1. Wyswietl wszystkie rachunki", "2. Zpisz rachunki do pliku", "3. Odczytaj rachunki z pliku", "4. Wroc" };
-        static int aktywnaPozycjaMenu = 0;
+
+        public static List<Zamowienie> _zamowienia = new List<Zamowienie>();
+        private static List<Rachunek> _rachunki = new List<Rachunek>();
 
 
-        public Aplikacja()
+
+
+        public static void DodajZamowienie(Zamowienie z)
         {
-            _menu = new Menu();
-            _zamowienia = new List<Zamowienie>();
-            _rachunki = new List<Rachunek>();
-            _kategoria = new List<Kategoria>();
-        }
 
-        public void DodajKategorieDoMenu(Kategoria k)
-        {
-            _menu.DodajKategorie(k);
-        }
-
-        public void UsunKategorieDoMenu(Kategoria k)
-        {
-            _menu.UsunKategorie(k);
-        }
-
-        public static void DodajDanieDoKategorii(Danie d, Kategoria k)
-        {
-            k.UsunPozycje(d);
-        }
-
-        public void UsunDanieZKategorii(Danie d, Kategoria k)
-        {
-            k.DodajPozycje(d);
-        }
-
-        public void DodajZamowienie(Zamowienie z)
-        {
             _zamowienia.Add(z);
+
         }
 
-        public void UsunZamowienie(Zamowienie z)
+        public static void UsunZamowienie(int idZam)
         {
-            _zamowienia.Remove(z);
+            var z = _zamowienia.FirstOrDefault(zamow => zamow.IdZam == idZam);
+            if (z != null)
+            {
+                _zamowienia.Remove(z);
+            }
         }
-
 
         public static void WyswietlWszystkieDania()
         {
-            foreach (Kategoria k in _menu.Kategoria)
-            {
-                Console.WriteLine(k.NazwaKategoria);
-                foreach (Danie d in k.IDDania)
+           
+                foreach (Danie d in Menu.danie)
                 {
-                    Console.WriteLine(" - " + Danie.Nazwa + ": " + Danie.Opis + " (" + Danie.Cena + " zł )");
+                    Console.WriteLine(" id:" + d.Id + " | " +  d.xd +  " | " + d.Nazwa + ": " + d.Opis + " (" + d.Cena + " zł )");
                 }
-            }
-            Console.ReadKey();
+            
         }
+
 
         public static void WyswietlZamowienia()
         {
             foreach (var zamowienie in _zamowienia)
             {
 
-               // Console.WriteLine("Data zamowienia: {0}", zamowienie.DataZamowienia);
+                Console.WriteLine("Data zamowienia: {0}", zamowienie.DataZamowienia);
+                Console.WriteLine("ID: {0}", zamowienie.IdZam);
                 Console.WriteLine("Dania: ");
-               // foreach (var d in zamowienie.Dania)
+                foreach (var d in zamowienie.Dania)
                 {
-                    Console.WriteLine(" - {0} ({1} zl)", Danie.Nazwa, Danie.Cena);
+                    Console.WriteLine(" - {0} ({1} zl)", d.Nazwa, d.Cena);
                 }
                 Console.WriteLine("Kwota: {0} zl", zamowienie.ObliczKwote());
                 Console.WriteLine();
@@ -93,20 +64,38 @@ namespace Applikacja2
 
         }
 
-       // public List<Zamowienie> WyszukajZamowieniePoDacie(DateTime data)
-        //{
-        //    return _zamowienia.Where(z => z.DataZamowienia.Date == data.Date).ToList();
-        //}
+        void IDisplayable.Display()
+        {
+            Console.WriteLine("Displeayble");
+        }
+        void IDisplayable.WyszukajPoID(int idZam)
+        {
+            foreach (var r in _rachunki.Where(r => r.Zamowienie.IdZam == idZam))
+            {
+                Console.WriteLine("Data zamowienia: {0}", r.Zamowienie.DataZamowienia);
+                Console.WriteLine("ID: {0}", r.Zamowienie.IdZam);
+                Console.WriteLine("Dania: ");
+                foreach (var d in r.Zamowienie.Dania)
+                {
+                    Console.WriteLine(" - {0} ({1} zl)", d.Nazwa, d.Cena);
+                }
+                Console.WriteLine("Kwota: {0} zl", r.Zamowienie.ObliczKwote());
+                Console.WriteLine();
+            }
+        }
 
-       // public void WygenerujRachunek(Zamowienie z)
-        //{
-        //    _rachunki.Add(new Rachunek());
-        //}
+        public static void WygenerujRachunek()
+        {
+            foreach (var z in _zamowienia)
+            { 
+            _rachunki.Add(new Rachunek(z));
+            }
+        }
 
 
         public static void OdczytajzPliku()
         {
-            using (StreamReader sr = new StreamReader($"C:\\Users\\propa\\source\\repos\\syst_zarzad_rest\\rachunki.txt"))
+            using (StreamReader sr = new StreamReader($".\\rachunki5.txt"))
             {
                 string line;
                 while ((line = sr.ReadLine()) != null)
@@ -121,14 +110,14 @@ namespace Applikacja2
             // tworzenie txt
             int i = 1;
 
-            using (StreamWriter sw = new StreamWriter($"C:\\Users\\propa\\source\\repos\\syst_zarzad_rest\\rachunki.txt"))
+            using (StreamWriter sw = new StreamWriter($".\\rachunki5.txt"))
             {
                 foreach (var rachunek in _rachunki)
                 {
-                   // sw.WriteLine(i + ". Data zamowienia: {0}", rachunek.Zamowienie.DataZamowienia);
-                   // foreach (var d in rachunek.Zamowienie.Dania)
+                    sw.WriteLine(i + ". Data zamowienia: {0}", rachunek.Zamowienie.DataZamowienia);
+                    foreach (var d in rachunek.Zamowienie.Dania)
                     {
-                        sw.WriteLine(" - {0} ({1} zl)", Danie.Nazwa, Danie.Cena);
+                        sw.WriteLine(" - {0} ({1} zl)", d.Nazwa, d.Cena);
                     }
                     sw.WriteLine("Kwota: {0} zl", rachunek.Kwota);
                     sw.WriteLine(" ");
@@ -137,144 +126,38 @@ namespace Applikacja2
             }
         }
 
-
-
-
         public static void WyswietlRachunki()
         {
             foreach (var rachunek in _rachunki)
             {
-                //Console.WriteLine("Data zamowienia: {0}", rachunek.Zamowienie.DataZamowienia);
+                Console.WriteLine("Data zamowienia: {0}", rachunek.Zamowienie.DataZamowienia);
+                Console.WriteLine("ID: {0}", rachunek.Zamowienie.IdZam);
                 Console.WriteLine("Dania: ");
-                //foreach (var d in rachunek.Zamowienie.Dania)
+                foreach (var d in rachunek.Zamowienie.Dania)
                 {
-                    Console.WriteLine(" - {0} ({1} zl)", Danie.Nazwa, Danie.Cena);
+                    Console.WriteLine(" - {0} ({1} zl)", d.Nazwa, d.Cena);
                 }
                 Console.WriteLine("Kwota: {0} zl", rachunek.Zamowienie.ObliczKwote());
                 Console.WriteLine();
             }
         }
 
-       // public List<Rachunek> WyszukajRachunkiPoDacie(DateTime data)
-        //{
-            //return _rachunki.Where(r => r.Zamowienie.DataZamowienia.Date == data.Date).ToList();
-       // }
-
-
-
-
-        /// <summary>
-        /// OPCJE MENU
-        /// </summary>
-        public static void StartOpcje()
+        public static void WyszukajRachunkiPoID(int idZam)
         {
-            while (true)
+            foreach (var r in _rachunki.Where(r => r.Zamowienie.IdZam == idZam))
             {
-                PokazOpcje();
-                WybieranieOpcji();
-                UruchomOpcje();
+                Console.WriteLine("Data zamowienia: {0}", r.Zamowienie.DataZamowienia);
+                Console.WriteLine("ID: {0}", r.Zamowienie.IdZam);
+                Console.WriteLine("Dania: ");
+                foreach (var d in r.Zamowienie.Dania)
+                {
+                    Console.WriteLine(" - {0} ({1} zl)", d.Nazwa, d.Cena);
+                }
+                Console.WriteLine("Kwota: {0} zl", r.Zamowienie.ObliczKwote());
+                Console.WriteLine();
             }
         }
 
-
-
-        public static void PokazOpcje()
-        {
-
-            Console.BackgroundColor = ConsoleColor.Blue;
-            Console.Clear();
-            Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("Press any key to continue");
-            Console.WriteLine();
-            for (int i = 0; i < pozycjeMenu.Length; i++)
-            {
-                if (i == aktywnaPozycjaMenu)
-                {
-                    Console.BackgroundColor = ConsoleColor.White;
-                    Console.ForegroundColor = ConsoleColor.Blue;
-                    Console.WriteLine("{0, -35}", pozycjeMenu[i]);
-                    Console.BackgroundColor = ConsoleColor.Blue;
-                    Console.ForegroundColor = ConsoleColor.White;
-
-
-
-                }
-                else
-                {
-                    Console.WriteLine(pozycjeMenu[i]);
-                }
-            }
-        }
-
-
-
-        public static void WybieranieOpcji()
-        {
-            do
-            {
-                ConsoleKeyInfo klawisz = Console.ReadKey();
-                if (klawisz.Key == ConsoleKey.UpArrow)
-                {
-                    aktywnaPozycjaMenu = (aktywnaPozycjaMenu > 0) ? aktywnaPozycjaMenu - 1 : pozycjeMenu.Length - 1;
-
-                    PokazOpcje();
-                }
-                else if (klawisz.Key == ConsoleKey.DownArrow)
-                {
-                    aktywnaPozycjaMenu = (aktywnaPozycjaMenu + 1) % pozycjeMenu.Length;
-
-                    PokazOpcje();
-                }
-                else if (klawisz.Key == ConsoleKey.Escape)
-                {
-                    aktywnaPozycjaMenu = pozycjeMenu.Length - 1;
-
-                    break;
-                }
-                else if (klawisz.Key == ConsoleKey.Enter)
-                    break;
-
-
-
-            } while (true);
-        }
-
-
-
-
-        public static void UruchomOpcje()
-        {
-            switch (aktywnaPozycjaMenu)
-            {
-                case 0: Console.Clear(); WyswietlWszystkieDania(); break;
-                case 1: Console.Clear(); WyswietlZamowienia(); break;
-                case 2:
-                    Console.Clear();
-                    Rachunek[] tabrachunek = new Rachunek[2];
-                    tabrachunek[0] = new Rachunek();
-                    tabrachunek[0].StartOpcje();
-                    break;
-                case 3: Console.Clear();
-                    Danie[] tabrachunek1 = new Danie[1];
-            
-                    tabrachunek1[0].StartOpcje();
-                    break;
-                case 4: Console.Clear();
-                    OpcjeZamowienia[] tabzamowienia = new OpcjeZamowienia[2];
-                    tabzamowienia[0] = new OpcjeZamowienia();
-                    tabzamowienia[0].StartOpcje();
-                    ; break;
-               
-                case 5: Environment.Exit(0); break;
-            }
-
-
-
-
-
-
-
-
-        }
+ 
     }
 }

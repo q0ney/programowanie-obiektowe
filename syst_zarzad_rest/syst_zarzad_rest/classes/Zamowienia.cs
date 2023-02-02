@@ -3,51 +3,46 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Applikacja2;
 
 
 namespace syst_zarzad_rest
 {
-    internal class Zamowienie
+    class Zamowienie
     {
-        static int aktywnaPozycjaMenu = 0;
-        static string[] pozycjeMenu = { "1. Dodaj Zamowienie", "2.Usun Zamowienie", "3. Wyswietl zamowienia", "4. Wroc" };
-        static public List<Danie> Dania { get; set; }
-        static public double Kwota { get; set; }
-        static public DateTime DataZamowienia { get; set; }
+        public List<Danie> Dania { get; set; }
+        public double Kwota { get; set; }
+        public DateTime DataZamowienia { get; set; }
+        public int IdZam { get; set; }
+        public static string[] pozycjeMenu = { "1. Stworz zamowienie", "2. Usun zamowienie", "3. Wyswietl zamowienia" , "4. Wroc" };
+        public static int aktywnaPozycjaMenu = 0;
 
 
-        public Zamowienie()
+        public Zamowienie(int idZam)
         {
             Dania = new List<Danie>();
             Kwota = 0;
             DataZamowienia = DateTime.Now;
+            IdZam = idZam;
         }
 
-        public void DodajDanie(Danie d)
+
+
+        public void DodajDanie(int idD)
         {
-            Dania.Add(d);
+            var danie22 = Menu.danie.FirstOrDefault(danie => danie.Id == idD);
+            if (danie22 != null)
+            {
+                Dania.Add(danie22);
+            }
         }
+
 
         public double ObliczKwote()
         {
-            return Dania.Sum(idDania => Danie.Cena);
+            return Dania.Sum(d => d.Cena);
         }
 
-
-
-        public class OpcjeZamowienia : IOpcje, IAddRemove
-        {
-            public void DodajPozycje()
-            {
-                Console.WriteLine("essa");
-            }
-            public void UsunPozycje()
-            {
-                Console.WriteLine("essa");
-            }
-
-            public void StartOpcje()
+        public static void StartOpcje()
         {
             while (true)
             {
@@ -59,14 +54,12 @@ namespace syst_zarzad_rest
 
 
 
-        public void PokazOpcje()
+        public static void PokazOpcje()
         {
 
             Console.BackgroundColor = ConsoleColor.Blue;
             Console.Clear();
             Console.ForegroundColor = ConsoleColor.White;
-            Console.Write("Press any key to continue");
-            Console.WriteLine();
             for (int i = 0; i < pozycjeMenu.Length; i++)
             {
                 if (i == aktywnaPozycjaMenu)
@@ -89,7 +82,7 @@ namespace syst_zarzad_rest
 
 
 
-        public void WybieranieOpcji()
+        public static void WybieranieOpcji()
         {
             do
             {
@@ -120,20 +113,32 @@ namespace syst_zarzad_rest
             } while (true);
         }
 
-        public void UruchomOpcje()
+
+        public static void UruchomOpcje()
         {
             switch (aktywnaPozycjaMenu)
             {
-                case 0: Console.Clear(); DodajPozycje(); break;
-                case 1: Console.Clear(); UsunPozycje(); break;
-                case 3: Console.Clear(); Aplikacja.WyswietlZamowienia(); break;
-                case 4:
-                    Console.Clear();
-                    Aplikacja.StartOpcje();
+                case 0: Console.Clear();
+                    Functions.TworzenieZamowien();
                     break;
-
+                case 1: Console.Clear();
+                    Functions.UsuwanieZamowien();
+                    break;
+                case 2:
+                    Console.Clear();
+                    Aplikacja.WyswietlZamowienia();
+                    Console.ReadKey();
+                    break;
+                case 3:
+                    Console.Clear();
+                    GUI.StartOpcje();
+                    break;
             }
-        }
+
+
         }
     }
 }
+
+    
+

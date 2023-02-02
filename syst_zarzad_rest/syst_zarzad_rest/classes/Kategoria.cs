@@ -4,41 +4,31 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-using Applikacja2;
 
 namespace syst_zarzad_rest
 {
-    class Kategoria 
+    class Kategoria
     {
         public string NazwaKategoria { get; set; }
-        public List<Danie> IDDania { get; set; }
 
 
         public Kategoria(string nazwaKategoria)
         {
             NazwaKategoria = nazwaKategoria;
-            IDDania = new List<Danie>();
         }
 
-        
-        // Metoda pozwalająca dodać danie do kategorii
-
-
-
-
-        public void UsunPozycje(Danie d)
+        public static List<Kategoria> kategoria = new List<Kategoria>()
         {
-            IDDania.Remove(d);
-        }
-        public void DodajPozycje(Danie d)
-        {
-            IDDania.Add(d);
-        }
+            new Kategoria("Przystawki"),
+            new Kategoria("Zupy"),
+            new Kategoria("Dania glowne")
+        };
 
-
+ 
         public override string ToString()
-        {
-            return $"Kategoria: {NazwaKategoria}";
-        }
+         {
+             return $"Kategoria: {NazwaKategoria}";
+         }
+      
     }
 }
