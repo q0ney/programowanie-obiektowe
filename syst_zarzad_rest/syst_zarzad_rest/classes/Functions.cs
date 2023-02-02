@@ -26,7 +26,7 @@ namespace syst_zarzad_rest
                 string op = Console.ReadLine();
                 Console.WriteLine("Podaj Cene:");
                 double ce = Convert.ToDouble(Console.ReadLine());
-                Console.WriteLine("Podaj nazwe kategorii do ktorej chcesz dodac danie: Przystawki, Zupy, Dania Glowne");
+                Console.WriteLine("Podaj nazwe kategorii do ktorej chcesz dodac danie: Przystawki, Zupy, Glowne");
                 string nazwaKategoria = Console.ReadLine();
                 Console.WriteLine("Podaj typ dania: Vege, Miesne, Rybne");
                 string type = Console.ReadLine();

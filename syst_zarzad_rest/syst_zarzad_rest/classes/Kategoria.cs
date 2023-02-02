@@ -21,7 +21,7 @@ namespace syst_zarzad_rest
         {
             new Kategoria("Przystawki"),
             new Kategoria("Zupy"),
-            new Kategoria("Dania glowne")
+            new Kategoria("Glowne")
         };
 
  
